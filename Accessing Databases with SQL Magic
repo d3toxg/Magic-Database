@@ -146,3 +146,22 @@ You can use the normal python assignment syntax to assign the results of your qu
 For example, I have a SQL query to retrieve the distribution of test scores (i.e. how many students got each score). I can assign the result of this query to the variable test_score_distribution using the = operator.
 test_score_distribution = %sql SELECT test_score as "Test Score", count(*) as "Frequency" from INTERNATIONAL_STUDENT_TEST_SCORES GROUP BY test_score;
 test_score_distribution
+
+Converting Query Results to DataFrames
+You can easily convert a SQL query result to a pandas dataframe using the DataFrame() method. Dataframe objects are much more versatile than SQL query result objects. For example, we can easily graph our test score distribution after converting to a dataframe.
+dataframe = test_score_distribution.DataFrame()
+​
+%matplotlib inline
+# uncomment the following line if you get an module error saying seaborn not found
+# !pip install seaborn==0.9.0
+import seaborn
+​
+plot = seaborn.barplot(x='Test Score',y='Frequency', data=dataframe)
+
+Now you know how to work with Db2 from within JupyterLab notebooks using SQL "magic"!
+
+%%sql 
+​
+
+-- Feel free to experiment with the data set provided in this notebook for practice:
+SELECT country, first_name, last_name, test_score FROM INTERNATIONAL_STUDENT_TEST_SCORES;   
