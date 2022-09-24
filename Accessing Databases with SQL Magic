@@ -141,3 +141,8 @@ For example, if I have a python variable country with a value of "Canada", I can
 country = "Canada"
 %sql select * from INTERNATIONAL_STUDENT_TEST_SCORES where country = :country
 
+Assigning the Results of Queries to Python Variables
+You can use the normal python assignment syntax to assign the results of your queries to python variables.
+For example, I have a SQL query to retrieve the distribution of test scores (i.e. how many students got each score). I can assign the result of this query to the variable test_score_distribution using the = operator.
+test_score_distribution = %sql SELECT test_score as "Test Score", count(*) as "Frequency" from INTERNATIONAL_STUDENT_TEST_SCORES GROUP BY test_score;
+test_score_distribution
